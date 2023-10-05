@@ -36,7 +36,7 @@ if (screen.width >= 768) {
       waifuPath: live2d_path + "waifu-tips.json",
 
       // apiPath: "https://live2d.fghrsh.net/api/",
-      cdnPath: "https://preeminent-puppy-319710.netlify.app/",
+      cdnPath: "https://jsd.cdn.zzko.cn/gh/cooliceycold/live@latest/",
 
       tools: [
         "hitokoto",
