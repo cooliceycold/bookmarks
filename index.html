@@ -1,56 +1,193 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Live2D 看板娘 / Demo</title>
-    <style>
-      #github svg {
-        transition: all 1s;
-        fill: #222;
-        color: #fff;
-        position: absolute;
+<!doctype html>
+<html lang="zh" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>狗子のProject</title>
+  <meta name="Description" content="Home Page of iissnan">
+  <meta name="color-scheme" content="dark light">
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
+</head>
+
+<body>
+  <div class="vi">
+    <h1 class="animate-slide-in-down">狗子のProject</h1>
+    <div class="quote">
+      <span class="quote-line quote-line-start animate-slide-in-left"></span>
+      <span class="quote-icon quote-icon-start animate-slide-in-down">
+        <i class="icon icon-quotes-left"></i>
+      </span>
+      <p class="quote-content animate-slide-in-down">人活着就是为了樱岛麻衣！</p>
+      <p class="quote-author animate-slide-in-down">《我没说过》—— <em>鲁迅</em></p>
+      <span class="quote-icon quote-icon-end animate-slide-in-up">
+        <i class="icon icon-quotes-right"></i>
+      </span>
+      <span class="quote-line quote-line-end animate-slide-in-right"></span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/cooliceycold" class="animate-slide-in-down">狗子のGitHub</a>
+      <a href="https://freeoffice.cf/bookmarks.html" class="animate-slide-in-down">狗子のBookMarks</a>
+      <a href="https://icedisk.cf" class="animate-slide-in-down">狗子のAlist</a>
+      <a href="https://iceindex.cf" class="animate-slide-in-down">狗子のPanIndex</a>
+      <a href="https://dogeice.cf" class="animate-slide-in-down">狗子のOneManager</a>
+      <a href="https://icelink.cf" class="animate-slide-in-down">狗子のMoe Counter!</a>
+      <a href="https://icecf.cf" class="animate-slide-in-down">狗子のShortLink</a>
+      <a href="https://jiojio.cf" class="animate-slide-in-down">狗子のIceyDownload</a>
+      <a href="https://decade.tk" class="animate-slide-in-down">狗子のWaline</a>
+      
+
+
+      
+    </div>
+    <div class="location">
+      <span class="location-icon animate-slide-in-up">
+        <i class="icon icon-map-pin"></i>
+      </span>
+      <span class="location-text animate-slide-in-down">光の国 - M78</span>
+    </div>
+    <div class="relocating">
+      Navigating to: <span class="relocate-location"></span>...
+    </div>
+  </div>
+
+  <script src="assets/vendors/jquery-3.3.1.min.js"></script>
+  <script>
+    $(function () {
+      var SLIDE_IN_DOWN = { opacity: 1, top: 0 };
+      var SLIDE_IN_UP = { opacity: 1, bottom: 0 };
+      var SLIDE_IN_LEFT = { left: 0 };
+      var SLIDE_IN_RIGHT = { right: 0 };
+
+      registerCheatCode();
+      executeAnimations();
+
+      function executeAnimations() {
+        $.when()
+          .then(animateTitle)
+          .then(animateQuote)
+          .then(animateLinks)
+          .then(animateLocation);
+      }
+
+      function animateTitle() {
+        return animate('h1', SLIDE_IN_DOWN);
+      }
+
+      function animateQuote() {
+        return $.when(
+          animate('.quote-line-start', SLIDE_IN_LEFT),
+          animate('.quote-line-end',SLIDE_IN_RIGHT),
+          animate('.quote-icon-start', SLIDE_IN_DOWN),
+          animate('.quote-icon-end', SLIDE_IN_UP)
+        )
+          .then(function () {
+            return animate('.quote-content', SLIDE_IN_DOWN);
+          })
+          .then(function () {
+            return animate('.quote-author', SLIDE_IN_DOWN);
+          });
+      }
+
+      function animateLinks() {
+        var DELAY_STEP = 200;
+        var elements = $('.links a');
+        var concurrent = $.makeArray(elements)
+          .map(function (element, index) {
+            return animate(element, SLIDE_IN_DOWN, index * DELAY_STEP);
+          });
+
+        return $.when.apply($, concurrent);
+      }
+
+      function animateLocation() {
+        return $.when(
+          animate('.location-icon', SLIDE_IN_UP),
+          animate('.location-text', SLIDE_IN_DOWN)
+        );
+      }
+
+      function animate(selector, properties, delay, options) {
+        delay = delay || 0;
+        return $(selector).delay(delay)
+          .animate(properties, options)
+          .promise();
+      }
+
+      function registerCheatCode() {
+        $(document.body).on('keydown', function (event) {
+          var KEY_B = 66;
+
+          if (event.which === KEY_B) {
+            $('.relocate-location').text('Bookmark Page');
+            $('.relocating').css('opacity', 1);
+
+            window.setTimeout(function () {
+              window.location.href = '/bookmarks.html';
+            }, 1000);
+          }
+        });
+      }
+    });
+  </script>
+  <style>
+    body:before {
         top: 0;
+        left: 0;
         right: 0;
-        border: 0;
-        width: 80px;
-        height: 80px;
-      }
-      #github:hover svg {
-        width: 160px;
-        height: 160px;
-      }
-      * {
-        box-sizing: border-box;
-      }
-    </style>
-  </head>
-  <body>
-    <a
-      id="github"
-      href="https://github.com/nova1751/live2d-api"
-      target="_blank"
-      title="Visit the open-source code on GitHub!"
-    >
-      <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path
-          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-          fill="currentColor"
-          class="octo-arm"
-        ></path>
-        <path
-          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-          fill="currentColor"
-          class="octo-body"
-        ></path>
-      </svg>
-    </a>
-    <!-- 顺序切换模型材质 -->
-    <script src="https://preeminent-puppy-319710.netlify.app/jsdelivr/random/autoload.js"></script>
-    <!-- 看板娘位置靠左 -->
-    <link
-      rel="stylesheet"
-      href="https://preeminent-puppy-319710.netlify.app/css/left.css"
-    />
-  </body>
+        bottom: 0;
+        opacity: 0.7;
+        z-index: -1;
+        content: "";
+        position: fixed;
+        background: url(https://t.mwm.moe/bd) center/cover;
+    }
+
+    .mdui-card-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin: 0 !important;
+
+    }
+
+    .br,
+    #content {
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: unset !important;
+    }
+
+    img {
+        object-fit: cover;
+    }
+
+    .mdui-card+.mdui-card-content {
+        min-height: 48vh;
+    }
+
+    .mdui-theme-layout-dark .mdui-card,
+    .mdui-card {
+        background-color: #ffffff00 !important;
+
+    }
+
+    .mdui-container {
+        max-width: 900px;
+
+    }
+
+
+</style>
+
+
+<!-- 随机切换模型材质 -->
+<script src="https://jsd.cdn.zzko.cn/gh/cooliceycold/live@latest/jsdelivr/random/autoload.js"></script>
+
+<!-- 看板娘位置靠左 -->
+<link
+  rel="stylesheet"
+  href="https://jsd.cdn.zzko.cn/gh/cooliceycold/live@latest/css/left.css"
+/>
+</body>
 </html>
