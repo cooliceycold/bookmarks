@@ -11,36 +11,13 @@
   <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
   <!-- 随机切换模型材质 -->
 <script src="/jsdelivr/random/autoload.js"></script>
- <!-- <script src="https://jsd.cdn.zzko.cn/gh/cooliceycold/live@latest/jsdelivr/random/autoload.js"></script>-->
+<!-- <script src="https://jsd.cdn.zzko.cn/gh/cooliceycold/live@latest/jsdelivr/random/autoload.js"></script>-->
 <!-- 看板娘位置靠左 -->
-<!--<link
-  rel="stylesheet"
-  href="https://jsd.cdn.zzko.cn/gh/cooliceycold/live@latest/css/left.css"
-/>-->
+<!--<link rel="stylesheet" href="https://jsd.cdn.zzko.cn/gh/cooliceycold/live@latest/css/left.css"/>-->
 
-  <link
-  rel="stylesheet"
-  href="/css/left.css"
-/>
+<link rel="stylesheet" href="/css/left.css"/>
 
-<div class="sakana-box"></div>
-<script src="https://cdn.jsdelivr.net/npm/sakana"></script>
-<script>
-Sakana.init({
-  el:         '.sakana-box',     // 启动元素 node 或 选择器
-  scale:      .5,                // 缩放倍数
-  canSwitchCharacter: true,      // 允许换角色
-});
-</script>
 
-<style>
-html .sakana-box{
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  transform-origin: 100% 100%; /* 从右下开始变换 */
-}
-</style>
   
     <style>
         body {
@@ -156,6 +133,24 @@ cursor: url(/cursor/miku1.png), auto;
 
 <body>
     <script src="https://fastly.jsdelivr.net/gh/lizina66/api/img/jpuer.js"></script>
+    <div class="sakana-box"></div>
+    <script src="https://fastly.jsdelivr.net/npm/sakana"></script>
+    <script>
+            Sakana.init({
+            el:         '.sakana-box',     // 启动元素 node 或 选择器
+            scale:      .5,                // 缩放倍数
+            canSwitchCharacter: true,      // 允许换角色
+            });
+    </script>
+
+<style>
+html .sakana-box{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  transform-origin: 100% 100%; /* 从右下开始变换 */
+}
+</style>
     <h1>狗子のBookmarks</h1>
 
     <div class="bookmarks">
